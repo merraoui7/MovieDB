@@ -15,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.LinearLayout;
 
 import com.zeneo.newsapp.Adapters.ViewPagerAdapter;
 import com.zeneo.newsapp.Fragments.CelebsFragment;
@@ -29,6 +30,7 @@ public class HomeActivity extends AppCompatActivity {
     TabLayout tabLayout;
     ViewPager viewPager;
     ViewPagerAdapter fragAdapter;
+    LinearLayout sLayout,mLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +41,8 @@ public class HomeActivity extends AppCompatActivity {
 
         tabLayout = (TabLayout)findViewById(R.id.tablt);
         viewPager = (ViewPager)findViewById(R.id.viewpager);
+        sLayout = (LinearLayout)findViewById(R.id.search_layout);
+        mLayout = (LinearLayout)findViewById(R.id.main_layout);
 
         fragAdapter = new ViewPagerAdapter(getSupportFragmentManager());
         fragAdapter.addFrag(new HomeFragment(),"Home");
@@ -84,12 +88,33 @@ public class HomeActivity extends AppCompatActivity {
 
         SearchView searchView = null;
         if (searchItem != null) {
+
             searchView = (SearchView) searchItem.getActionView();
         }
         if (searchView != null) {
             searchView.setSearchableInfo(searchManager.getSearchableInfo(HomeActivity.this.getComponentName()));
-
         }
+        searchView.setOnSearchClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+        searchItem.setOnActionExpandListener(new MenuItem.OnActionExpandListener() {
+            @Override
+            public boolean onMenuItemActionExpand(MenuItem menuItem) {
+                sLayout.setVisibility(View.VISIBLE);
+                mLayout.setVisibility(View.INVISIBLE);
+                return true;
+            }
+
+            @Override
+            public boolean onMenuItemActionCollapse(MenuItem menuItem) {
+                sLayout.setVisibility(View.INVISIBLE);
+                mLayout.setVisibility(View.VISIBLE);
+                return true;
+            }
+        });
         return super.onCreateOptionsMenu(menu);
     }
     public void setCurrentPage(int i){

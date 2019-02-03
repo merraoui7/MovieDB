@@ -125,7 +125,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Top Rated Movies"
+                        android:text="Top Rated TV Shows"
                         android:textColor="#fff"
                         android:paddingBottom="5dp"
                         android:textSize="20dp"
