@@ -34,7 +34,7 @@ public class TvFragment extends Fragment {
     LinearLayout layout,layout1;
 
     GetResFromApi res;
-    String url= "https://api.themoviedb.org/3/discover/tv?api_key=5d173b53167711178472dc9d98603e31&language=en-US&sort_by=popularity.desc&first_air_date_year=2019&timezone=America%2FNew_York&include_null_first_air_dates=false&page=";
+    String url= "https://api.themoviedb.org/3/discover/tv?api_key=5d173b53167711178472dc9d98603e31&language=en-US&sort_by=popularity.desc&timezone=America%2FNew_York&include_null_first_air_dates=false&page=";
 
 
 

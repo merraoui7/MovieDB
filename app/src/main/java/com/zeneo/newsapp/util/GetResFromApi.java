@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import com.zeneo.newsapp.Adapters.PopularListAdapter;
+import com.zeneo.newsapp.Adapters.RateListAdapter;
 import com.zeneo.newsapp.Models.Movies;
 import com.zeneo.newsapp.R;
 
@@ -81,6 +82,8 @@ public class GetResFromApi {
 
             String titles;
             String imgurl;
+            String rating;
+            String desc;
             int id;
             if (jsonStr != null){
                 try {
@@ -88,23 +91,44 @@ public class GetResFromApi {
                     JSONObject mainObject = new JSONObject(jsonStr);
                     JSONArray results = mainObject.getJSONArray("results");
                     for (int i = 0 ;i < results.length() ;i++ ){
-
-                        if(media_type.equals("movie")){
-                            titles = results.getJSONObject(i).getString("title");
-                            imgurl ="https://image.tmdb.org/t/p/w500"+ results.getJSONObject(i).getString("poster_path");
-                            id = results.getJSONObject(i).getInt("id");
-                            list.add(new Movies(titles,imgurl,id));
-                        }else if (media_type.equals("TV")){
-                            titles = results.getJSONObject(i).getString("name");
-                            imgurl = "https://image.tmdb.org/t/p/w500" + results.getJSONObject(i).getString("poster_path");
-                            id = results.getJSONObject(i).getInt("id");
-                            list.add(new Movies(titles, imgurl, id));
-                        }else if (media_type.equals("people")){
-                            titles = results.getJSONObject(i).getString("name");
-                            imgurl ="https://image.tmdb.org/t/p/w500"+ results.getJSONObject(i).getString("profile_path");
-                            id = results.getJSONObject(i).getInt("id");
-                            list.add(new Movies(titles,imgurl,id));
+                        switch (media_type){
+                            case "movie":
+                                titles = results.getJSONObject(i).getString("title");
+                                imgurl ="https://image.tmdb.org/t/p/w500"+ results.getJSONObject(i).getString("poster_path");
+                                id = results.getJSONObject(i).getInt("id");
+                                list.add(new Movies(titles,imgurl,id));
+                                break;
+                            case "TV":
+                                titles = results.getJSONObject(i).getString("name");
+                                imgurl = "https://image.tmdb.org/t/p/w500" + results.getJSONObject(i).getString("poster_path");
+                                id = results.getJSONObject(i).getInt("id");
+                                list.add(new Movies(titles, imgurl, id));
+                                break;
+                            case "people":
+                                titles = results.getJSONObject(i).getString("name");
+                                imgurl ="https://image.tmdb.org/t/p/w500"+ results.getJSONObject(i).getString("profile_path");
+                                id = results.getJSONObject(i).getInt("id");
+                                list.add(new Movies(titles,imgurl,id));
+                                break;
+                            case "topMovies":
+                                titles = results.getJSONObject(i).getString("title");
+                                imgurl ="https://image.tmdb.org/t/p/w500"+ results.getJSONObject(i).getString("poster_path");
+                                id = results.getJSONObject(i).getInt("id");
+                                rating = String.valueOf(results.getJSONObject(i).getDouble("vote_average"));
+                                desc = results.getJSONObject(i).getString("overview");
+                                list.add(new Movies(titles,imgurl,id,rating+"/10",desc));
+                                break;
+                            case "toptv":
+                                titles = results.getJSONObject(i).getString("name");
+                                imgurl ="https://image.tmdb.org/t/p/w500"+ results.getJSONObject(i).getString("poster_path");
+                                id = results.getJSONObject(i).getInt("id");
+                                rating = String.valueOf(results.getJSONObject(i).getDouble("vote_average"));
+                                desc = results.getJSONObject(i).getString("overview");
+                                list.add(new Movies(titles,imgurl,id,rating+"/10",desc));
+                                break;
                         }
+
+
 
 
                     }
@@ -126,7 +150,7 @@ public class GetResFromApi {
                 layout.setVisibility(View.INVISIBLE);
                 layout2.setVisibility(View.VISIBLE);
             }
-            postitionToScrool =list.size()-1;
+            postitionToScrool =list.size()-6;
 
 
 
@@ -136,22 +160,27 @@ public class GetResFromApi {
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
             PopularListAdapter adapter1 = new PopularListAdapter(list,context);
+            RateListAdapter adapter2 = new RateListAdapter(list,context);
             if (!isRefreshed){
                 if (listType.equals("hori")){
                     recyclerView.setLayoutManager(new LinearLayoutManager(context,LinearLayout.HORIZONTAL,false));
+                    recyclerView.setAdapter(adapter1);
                 }else if (listType.equals("grid")){
                     recyclerView.setLayoutManager(new GridLayoutManager(context,3));
+                    recyclerView.setAdapter(adapter1);
+                } else if (listType.equals("grid1")){
+                    recyclerView.setLayoutManager(new GridLayoutManager(context,2));
+                    recyclerView.setAdapter(adapter2);
                 }
                 layout.setVisibility(View.VISIBLE);
                 layout2.setVisibility(View.INVISIBLE);
-                recyclerView.setAdapter(adapter1);
+
             } else {
 
                 recyclerView.setAdapter(adapter1);
                 recyclerView.getLayoutManager().scrollToPosition(postitionToScrool);
                 adapter1.notifyDataSetChanged();
             }
-            Log.i("img url",list.get(8).getImgurl());
 
 
 

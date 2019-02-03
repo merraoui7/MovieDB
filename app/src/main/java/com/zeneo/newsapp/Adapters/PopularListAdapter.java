@@ -43,7 +43,7 @@ public class PopularListAdapter extends RecyclerView.Adapter<PopularListAdapter.
         if (list.get(position).getImgurl() != null){
             Glide.with(context).load(list.get(position).getImgurl()).apply(centerCropTransform()
                     .error(R.drawable.bg_null)
-                    .priority(Priority.HIGH)).into(holder.imageView);
+            ).into(holder.imageView);
 
         }
 

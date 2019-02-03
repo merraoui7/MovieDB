@@ -30,7 +30,7 @@ public class HomeFragment extends Fragment {
 
     List<Movies> firstlist = new ArrayList<>();
     List<Movies> seclist = new ArrayList<>();
-    RecyclerView firstrecyclerView , secRecyclerView;
+    RecyclerView firstrecyclerView , secRecyclerView , recyclerView3 ,recyclerView4;
     LinearLayout layout,layout1;
 
 
@@ -48,37 +48,23 @@ public class HomeFragment extends Fragment {
 
         firstrecyclerView = (RecyclerView)view.findViewById(R.id.poprec);
         secRecyclerView = (RecyclerView)view.findViewById(R.id.poptvrec);
+        recyclerView3 = (RecyclerView)view.findViewById(R.id.topmovrec);
+        recyclerView4 = (RecyclerView)view.findViewById(R.id.toptvrec);
         layout = (LinearLayout)view.findViewById(R.id.home_content);
         layout1 = (LinearLayout)view.findViewById(R.id.home_load);
-
-        firstrecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-                super.onScrollStateChanged(recyclerView, newState);
-
-
-            }
-
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-
-                if (dx > 0) {
-                    // Recycle view scrolling down...
-                    if(recyclerView.canScrollHorizontally(RecyclerView.FOCUS_LEFT) == false){
-                        Toast.makeText(getContext(), "Reached the end of recycler view", Toast.LENGTH_LONG).show();
-                    }
-
-                }
-            }
-        });
 
         new GetResFromApi(firstrecyclerView,getContext(),
                 "https://api.themoviedb.org/3/discover/movie?api_key=5d173b53167711178472dc9d98603e31&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1"
         ,"movie","hori",layout,layout1).getDetails();
         new GetResFromApi(secRecyclerView,getContext(),
-                "https://api.themoviedb.org/3/discover/tv?api_key=5d173b53167711178472dc9d98603e31&language=en-US&sort_by=popularity.desc&first_air_date_year=2019&page=1&timezone=America%2FNew_York&include_null_first_air_dates=false"
+                "https://api.themoviedb.org/3/discover/tv?api_key=5d173b53167711178472dc9d98603e31&language=en-US&sort_by=popularity.desc&page=1&timezone=America%2FNew_York&include_null_first_air_dates=false"
                 ,"TV","hori",layout,layout1).getDetails();
+        new GetResFromApi(recyclerView3,getContext(),
+                "https://api.themoviedb.org/3/movie/top_rated?api_key=5d173b53167711178472dc9d98603e31&language=en-US&page=1"
+                ,"topMovies","grid1",layout,layout1).getDetails();
+        new GetResFromApi(recyclerView4,getContext(),
+                "https://api.themoviedb.org/3/tv/top_rated?api_key=5d173b53167711178472dc9d98603e31&language=en-US&page=1",
+                "toptv","grid1",layout,layout1).getDetails();
 
 
 
