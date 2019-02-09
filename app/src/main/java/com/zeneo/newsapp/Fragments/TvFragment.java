@@ -48,7 +48,7 @@ public class TvFragment extends Fragment {
         recyclerView =(RecyclerView)view.findViewById(R.id.tvList);
         layout = (LinearLayout)view.findViewById(R.id.tv_content);
         layout1 = (LinearLayout)view.findViewById(R.id.tv_load);
-        res = new GetResFromApi(recyclerView,getContext(), url+ page[0],"TV","grid",layout,layout1);
+        res = new GetResFromApi(recyclerView,getContext(), url+ page[0],"TV","grid",layout,layout1,"TV");
         res.clearData();
         res.getDetails();
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {

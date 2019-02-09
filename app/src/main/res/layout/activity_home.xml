@@ -10,17 +10,69 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="invisible"
-        android:background="@color/colorPrimaryDark"
-        android:id="@+id/search_layout">
-        <TextView
+        android:background="@color/colorPrimaryDark">
+        <android.support.v4.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center"
-            android:textSize="15sp"
-            android:textColor="@android:color/darker_gray"
-            android:text="Search for something"/>
+            tools:ignore="UselessParent">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:id="@+id/search_layout">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="210dp"
+                    android:gravity="center"
+                    android:textSize="15sp"
+                    android:textColor="@android:color/darker_gray"
+                    android:text="Search for something"
+                    android:id="@+id/simpletxtview"
+                    />
+                <android.support.v7.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="?actionBarSize"
+                    android:id="@+id/list_mov_search"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#2977e4"
+                    android:text="SEE MORE"
+                    android:visibility="gone"
+                    android:padding="5dp"
+                    android:gravity="end"
+                    android:id="@+id/seemoremovie"/>
+                <android.support.v7.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/list_tv_search"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#2977e4"
+                    android:text="SEE MORE"
+                    android:padding="5dp"
+                    android:gravity="end"
+                    android:visibility="gone"
+                    android:id="@+id/seemoretv"/>
+                <android.support.v7.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/list_peo_search"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#2977e4"
+                    android:text="SEE MORE"
+                    android:visibility="gone"
+                    android:padding="5dp"
+                    android:gravity="end"
+                    android:id="@+id/seemorepeople"/>
+            </LinearLayout>
+        </android.support.v4.widget.NestedScrollView>
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"

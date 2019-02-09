@@ -61,7 +61,7 @@ public class MoviesFragment extends Fragment {
         layout = (LinearLayout)view.findViewById(R.id.movie_content);
         layout1 = (LinearLayout)view.findViewById(R.id.movie_load);
         res = new GetResFromApi(recyclerView,getContext(), url+ page[0]
-                ,"movie","grid",layout,layout1);
+                ,"movie","grid",layout,layout1,"movie");
         res.clearData();
         res.getDetails();
 

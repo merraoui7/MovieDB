@@ -46,7 +46,7 @@ public class CelebsFragment extends Fragment {
         layout1 = (LinearLayout)view.findViewById(R.id.celeb_load);
         res = new GetResFromApi(recyclerView,getContext(),
                 url+ page[0]
-                ,"people","grid",layout,layout1);
+                ,"people","grid",layout,layout1,"people");
         res.clearData();
         res.getDetails();
 

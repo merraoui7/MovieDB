@@ -1,6 +1,7 @@
 package com.zeneo.newsapp.Adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -8,11 +9,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.Priority;
 import com.bumptech.glide.RequestBuilder;
+import com.zeneo.newsapp.Activities.MoviesActivity;
+import com.zeneo.newsapp.Activities.PeopleActivity;
+import com.zeneo.newsapp.Activities.TVShowsActivity;
 import com.zeneo.newsapp.Models.Movies;
 import com.zeneo.newsapp.R;
 
@@ -38,7 +43,7 @@ public class PopularListAdapter extends RecyclerView.Adapter<PopularListAdapter.
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         holder.textView.setText(list.get(position).getTitle());
         if (list.get(position).getImgurl() != null){
             Glide.with(context).load(list.get(position).getImgurl()).apply(centerCropTransform()
@@ -46,6 +51,24 @@ public class PopularListAdapter extends RecyclerView.Adapter<PopularListAdapter.
             ).into(holder.imageView);
 
         }
+        holder.layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(list.get(position).getType().equals("movie")){
+                    Intent i = new Intent(context,MoviesActivity.class);
+                    i.putExtra("id",String.valueOf(list.get(position).getMovie_id()));
+                    context.startActivity(i);
+                } else if (list.get(position).getType().equals("TV")){
+                    Intent i = new Intent(context,TVShowsActivity.class);
+                    i.putExtra("id",String.valueOf(list.get(position).getMovie_id()));
+                    context.startActivity(i);
+                } else if (list.get(position).getType().equals("people")){
+                    Intent i = new Intent(context,PeopleActivity.class);
+                    i.putExtra("id",String.valueOf(list.get(position).getMovie_id()));
+                    context.startActivity(i);
+                }
+            }
+        });
 
     }
 
@@ -58,12 +81,14 @@ public class PopularListAdapter extends RecyclerView.Adapter<PopularListAdapter.
 
         TextView textView;
         ImageView imageView;
+        LinearLayout layout;
 
         public ViewHolder(View itemView) {
             super(itemView);
 
             textView = (TextView)itemView.findViewById(R.id.hortitle);
             imageView = (ImageView) itemView.findViewById(R.id.horposter);
+            layout = (LinearLayout)itemView.findViewById(R.id.mov_lt);
 
         }
     }

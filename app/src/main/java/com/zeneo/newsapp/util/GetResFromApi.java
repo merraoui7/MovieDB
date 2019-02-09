@@ -37,6 +37,7 @@ public class GetResFromApi {
     private String listType;
     private LinearLayout layout,layout2;
     private boolean isRefreshed = false;
+    private String type;
 
 
     public void setRefreshed(boolean refreshed) {
@@ -45,7 +46,7 @@ public class GetResFromApi {
 
 
 
-    public GetResFromApi(RecyclerView recyclerView, Context context, String url, String media_type, String listType, LinearLayout layout, LinearLayout layout2) {
+    public GetResFromApi(RecyclerView recyclerView, Context context, String url, String media_type, String listType, LinearLayout layout, LinearLayout layout2, String type) {
         this.recyclerView = recyclerView;
         this.context = context;
         this.url = url;
@@ -53,6 +54,7 @@ public class GetResFromApi {
         this.listType = listType;
         this.layout = layout;
         this.layout2 = layout2;
+        this.type = type;
     }
 
 
@@ -96,19 +98,19 @@ public class GetResFromApi {
                                 titles = results.getJSONObject(i).getString("title");
                                 imgurl ="https://image.tmdb.org/t/p/w500"+ results.getJSONObject(i).getString("poster_path");
                                 id = results.getJSONObject(i).getInt("id");
-                                list.add(new Movies(titles,imgurl,id));
+                                list.add(new Movies(titles,imgurl,id,type));
                                 break;
                             case "TV":
                                 titles = results.getJSONObject(i).getString("name");
                                 imgurl = "https://image.tmdb.org/t/p/w500" + results.getJSONObject(i).getString("poster_path");
                                 id = results.getJSONObject(i).getInt("id");
-                                list.add(new Movies(titles, imgurl, id));
+                                list.add(new Movies(titles, imgurl, id,type));
                                 break;
                             case "people":
                                 titles = results.getJSONObject(i).getString("name");
                                 imgurl ="https://image.tmdb.org/t/p/w500"+ results.getJSONObject(i).getString("profile_path");
                                 id = results.getJSONObject(i).getInt("id");
-                                list.add(new Movies(titles,imgurl,id));
+                                list.add(new Movies(titles,imgurl,id ,type));
                                 break;
                             case "topMovies":
                                 titles = results.getJSONObject(i).getString("title");
@@ -127,6 +129,7 @@ public class GetResFromApi {
                                 list.add(new Movies(titles,imgurl,id,rating+"/10",desc));
                                 break;
                         }
+
 
 
 

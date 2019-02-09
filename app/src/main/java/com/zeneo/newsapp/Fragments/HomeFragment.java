@@ -11,9 +11,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.zeneo.newsapp.Activities.HomeActivity;
+import com.zeneo.newsapp.Activities.MainActivity;
 import com.zeneo.newsapp.Models.Movies;
 import com.zeneo.newsapp.R;
 import com.zeneo.newsapp.util.GetResFromApi;
@@ -28,10 +31,10 @@ import java.util.List;
  */
 public class HomeFragment extends Fragment {
 
-    List<Movies> firstlist = new ArrayList<>();
-    List<Movies> seclist = new ArrayList<>();
+
     RecyclerView firstrecyclerView , secRecyclerView , recyclerView3 ,recyclerView4;
     LinearLayout layout,layout1;
+    TextView seemore1,seemore2;
 
 
     public HomeFragment() {
@@ -46,6 +49,8 @@ public class HomeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
 
+        seemore1 =(TextView)view.findViewById(R.id.moremoviesbtn);
+        seemore2 = (TextView)view.findViewById(R.id.moretvbtn);
         firstrecyclerView = (RecyclerView)view.findViewById(R.id.poprec);
         secRecyclerView = (RecyclerView)view.findViewById(R.id.poptvrec);
         recyclerView3 = (RecyclerView)view.findViewById(R.id.topmovrec);
@@ -55,17 +60,28 @@ public class HomeFragment extends Fragment {
 
         new GetResFromApi(firstrecyclerView,getContext(),
                 "https://api.themoviedb.org/3/discover/movie?api_key=5d173b53167711178472dc9d98603e31&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1"
-        ,"movie","hori",layout,layout1).getDetails();
+        ,"movie","hori",layout,layout1,"movie").getDetails();
         new GetResFromApi(secRecyclerView,getContext(),
                 "https://api.themoviedb.org/3/discover/tv?api_key=5d173b53167711178472dc9d98603e31&language=en-US&sort_by=popularity.desc&page=1&timezone=America%2FNew_York&include_null_first_air_dates=false"
-                ,"TV","hori",layout,layout1).getDetails();
+                ,"TV","hori",layout,layout1,"TV").getDetails();
         new GetResFromApi(recyclerView3,getContext(),
                 "https://api.themoviedb.org/3/movie/top_rated?api_key=5d173b53167711178472dc9d98603e31&language=en-US&page=1"
-                ,"topMovies","grid1",layout,layout1).getDetails();
+                ,"topMovies","grid1",layout,layout1,"movie").getDetails();
         new GetResFromApi(recyclerView4,getContext(),
                 "https://api.themoviedb.org/3/tv/top_rated?api_key=5d173b53167711178472dc9d98603e31&language=en-US&page=1",
-                "toptv","grid1",layout,layout1).getDetails();
+                "toptv","grid1",layout,layout1,"TV").getDetails();
 
+        seemore1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ((HomeActivity)getContext()).getViewPager().setCurrentItem(1);
+            }
+        });
+        seemore2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ((HomeActivity)getContext()).getViewPager().setCurrentItem(2);            }
+        });
 
 
         return view;

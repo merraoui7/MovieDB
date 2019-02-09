@@ -7,6 +7,9 @@ public class Movies {
     private int movie_id;
     private String rating;
     private String overview;
+    private String type;
+
+
 
     public Movies(String title, String imgurl, int movie_id, String rating, String overview) {
         this.title = title;
@@ -14,6 +17,14 @@ public class Movies {
         this.movie_id = movie_id;
         this.rating = rating;
         this.overview = overview;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public String getRating() {
@@ -33,10 +44,11 @@ public class Movies {
         this.overview = overview;
     }
 
-    public Movies(String title, String imgurl, int movie_id) {
+    public Movies(String title, String imgurl, int movie_id, String type) {
         this.title = title;
         this.imgurl = imgurl;
         this.movie_id = movie_id;
+        this.type = type;
     }
 
     public String getTitle() {

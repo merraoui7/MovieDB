@@ -47,9 +47,9 @@ public class NewsFragment extends Fragment {
         recyclerView2 = (RecyclerView)view.findViewById(R.id.trendtvlist);
         recyclerView3 = (RecyclerView)view.findViewById(R.id.trendpeoplelist);
 
-        new GetResFromApi(recyclerView1,getContext(),url1 ,"movie","hori",layout,layout1).getDetails();
-        new GetResFromApi(recyclerView2,getContext(),url2 ,"TV","hori",layout,layout1).getDetails();
-        new GetResFromApi(recyclerView3,getContext(),url3 ,"people","hori",layout,layout1).getDetails();
+        new GetResFromApi(recyclerView1,getContext(),url1 ,"movie","hori",layout,layout1,"movie").getDetails();
+        new GetResFromApi(recyclerView2,getContext(),url2 ,"TV","hori",layout,layout1,"TV").getDetails();
+        new GetResFromApi(recyclerView3,getContext(),url3 ,"people","hori",layout,layout1,"people").getDetails();
 
         return view;
     }
