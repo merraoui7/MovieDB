@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="100dp"
+    android:layout_height="213dp"
+    android:background="@color/colorPrimaryDark"
+    android:layout_margin="7dp"
+    android:layout_gravity="center"
+    android:id="@+id/mov_lt">
+
+
+    <FrameLayout
+        android:layout_width="100dp"
+        android:layout_height="150dp"
+        >
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="150dp"
+            android:src="@drawable/test_poster"
+            android:id="@+id/horposter"
+            />
+
+
+
+            <LinearLayout
+                android:layout_width="40dp"
+                android:layout_height="85dp"
+                android:layout_marginLeft="5dp"
+                android:orientation="vertical"
+                android:background="@android:color/white"
+                android:id="@+id/horaddtodata"
+                android:padding="3dp"
+                android:visibility="gone">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/favorite_dark_enable"
+                    android:layout_weight="1"
+                    android:id="@+id/watch_list"/>
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:scaleType="fitEnd"
+                    android:src="@drawable/dark_watchlist_add"
+                    android:id="@+id/favorite"/>
+            </LinearLayout>
+
+        </FrameLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Aquaman"
+            android:id="@+id/hortitle"
+            android:padding="5dp"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textColor="#fff"/>
+    </LinearLayout>
+
+
+
+</LinearLayout>
